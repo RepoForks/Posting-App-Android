@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list"
+        android:name="com.app.truevox.surveyapp.controller.access.ui.fragment.main.NotificationFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="com.app.truevox.surveyapp.controller.access.ui.fragment.main.NotificationFragment"
+        tools:listitem="@layout/fragment_notification" />
+
+    <LinearLayout
+        android:id="@+id/layout_no_result"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_policeman"
+            android:layout_width="240dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content" />
+        <com.app.infideap.stylishwidget.view.ATextView
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:text="@string/nonotificationmessage"
+            android:ems="15"/>
+    </LinearLayout>
+</FrameLayout>
