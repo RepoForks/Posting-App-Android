@@ -1,4 +1,4 @@
-package com.app.infideap.postingapp;
+package com.app.infideap.postingapp.entity;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;

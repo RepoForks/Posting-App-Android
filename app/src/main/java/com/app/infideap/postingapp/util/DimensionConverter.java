@@ -1,4 +1,4 @@
-package com.app.infideap.postingapp;
+package com.app.infideap.postingapp.util;
 
 import android.util.DisplayMetrics;
 import android.util.TypedValue;

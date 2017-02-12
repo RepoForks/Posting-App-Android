@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_post_add"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.app.infideap.postingapp.activity.PostAddActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:background="@color/colorGrey_300"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:id="@+id/imageView_profile_photo"/>
+            <android.support.v4.widget.Space
+                android:layout_width="5dp"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.app.infideap.stylishwidget.view.ATextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/textView_username"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+        <android.support.v4.widget.Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+        <com.app.infideap.stylishwidget.view.AEditText
+            android:id="@+id/editText_post"
+            android:gravity="top"
+            android:background="#0fff"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:hint="@string/postaddhint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</RelativeLayout>

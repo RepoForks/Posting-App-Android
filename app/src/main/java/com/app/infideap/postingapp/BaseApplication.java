@@ -4,7 +4,8 @@ import android.app.Application;
 
 import com.app.infideap.notificationapp.DaoMaster;
 import com.app.infideap.notificationapp.DaoSession;
-import com.google.firebase.FirebaseApp;
+import com.app.infideap.postingapp.resource.Api;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -17,8 +18,11 @@ public class BaseApplication extends Application {
 
     @Override
     public void onCreate() {
+
         super.onCreate();
-        FirebaseApp.initializeApp(this);
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
+//        FirebaseApp.initializeApp(this);
 
         String databaseName = ENCRYPTED ?
                 "notification-encrypted.db" : "notification.db";
@@ -28,6 +32,7 @@ public class BaseApplication extends Application {
         Database db = ENCRYPTED ? helper.getEncryptedWritableDb(password) : helper.getWritableDb();
         daoSession = new DaoMaster(db).newSession();
 
+        Api.init(FirebaseDatabase.getInstance());
 
     }
 

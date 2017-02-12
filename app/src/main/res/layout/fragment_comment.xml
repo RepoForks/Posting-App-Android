@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView_profile_photo"
+            android:layout_width="@dimen/photo_size_small"
+            android:layout_height="@dimen/photo_size_small"
+            android:background="@color/colorGrey_300" />
+
+        <android.support.v4.widget.Space
+            android:layout_width="@dimen/activity_vertical_margin"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.app.infideap.stylishwidget.view.ATextView
+                android:id="@+id/textView_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/colorBlack_1000" />
+
+            <com.app.infideap.stylishwidget.view.ATextView
+                android:id="@+id/textView_text"
+                android:textColor="@color/colorBlack_1000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="5dp" />
+            <com.app.infideap.stylishwidget.view.ATextView
+                android:id="@+id/textView_duration"
+                android:layout_width="wrap_content"
+                android:textSize="11sp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

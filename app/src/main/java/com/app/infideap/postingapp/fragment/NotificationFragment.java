@@ -1,4 +1,4 @@
-package com.app.infideap.postingapp;
+package com.app.infideap.postingapp.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.app.infideap.notificationapp.NotificationDao;
 import com.app.infideap.notificationapp.R;
+import com.app.infideap.postingapp.entity.Notification;
+import com.app.infideap.postingapp.adapter.NotificationRecyclerViewAdapter;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;

@@ -1,4 +1,4 @@
-package com.app.infideap.postingapp;
+package com.app.infideap.postingapp.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;

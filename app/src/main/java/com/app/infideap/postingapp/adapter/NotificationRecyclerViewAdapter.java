@@ -1,4 +1,4 @@
-package com.app.infideap.postingapp;
+package com.app.infideap.postingapp.adapter;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
-import com.app.infideap.postingapp.NotificationFragment.OnListFragmentInteractionListener;
+import com.app.infideap.postingapp.util.Common;
+import com.app.infideap.postingapp.util.DimensionConverter;
+import com.app.infideap.postingapp.entity.Notification;
+import com.app.infideap.postingapp.fragment.NotificationFragment.OnListFragmentInteractionListener;
 import com.app.infideap.notificationapp.R;
 import com.app.infideap.stylishwidget.view.Stylish;
 

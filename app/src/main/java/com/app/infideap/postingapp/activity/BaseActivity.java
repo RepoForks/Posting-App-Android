@@ -1,8 +1,10 @@
-package com.app.infideap.postingapp;
+package com.app.infideap.postingapp.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -15,11 +17,13 @@ import org.greenrobot.eventbus.Subscribe;
 public class BaseActivity extends AppCompatActivity {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
+    protected FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        auth = FirebaseAuth.getInstance();
 
     }
 

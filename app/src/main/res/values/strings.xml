@@ -17,4 +17,11 @@
     <string name="yesterday">Yesterday</string>
     <string name="daysago">%d days ago</string>
     <string name="notification">Notification</string>
+    <string name="postaddhint">What\'s on your mind?</string>
+    <string name="post">POST</string>
+    <string name="posttoserver">Post to Server</string>
+    <string name="username">Username</string>
+    <string name="done">Done</string>
+    <string name="comment">Comment</string>
+    <string name="commentaddhint">Write a comment..</string>
 </resources>

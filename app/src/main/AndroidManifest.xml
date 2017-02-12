@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.app.infideap.notificationapp">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="com.app.infideap.postingapp.BaseApplication"
         android:allowBackup="true"
@@ -21,7 +23,7 @@
         </service>
 
         <activity
-            android:name="com.app.infideap.postingapp.MainActivity"
+            android:name="com.app.infideap.postingapp.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -30,6 +32,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:label="@string/posttoserver"
+            android:name="com.app.infideap.postingapp.activity.PostAddActivity"
+            android:parentActivityName="com.app.infideap.postingapp.activity.MainActivity"></activity>
     </application>
 
 </manifest>

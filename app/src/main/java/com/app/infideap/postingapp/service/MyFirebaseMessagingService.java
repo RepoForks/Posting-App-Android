@@ -26,9 +26,9 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.app.infideap.postingapp.BaseApplication;
-import com.app.infideap.postingapp.Common;
-import com.app.infideap.postingapp.MainActivity;
-import com.app.infideap.postingapp.Notification;
+import com.app.infideap.postingapp.util.Common;
+import com.app.infideap.postingapp.activity.MainActivity;
+import com.app.infideap.postingapp.entity.Notification;
 import com.app.infideap.notificationapp.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
