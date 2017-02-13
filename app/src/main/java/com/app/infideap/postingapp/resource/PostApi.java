@@ -39,7 +39,8 @@ public class PostApi {
                 .orderByChild("parentKey")
                 .equalTo(parentKey)
                 .addChildEventListener(new ChildEventListener() {
-                    HashMap <String, Post>map = new HashMap<String, Post>();
+                    HashMap<String, Post> map = new HashMap<String, Post>();
+
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                         Post post = dataSnapshot.getValue(Post.class);
@@ -78,6 +79,44 @@ public class PostApi {
 
                     }
 
+                });
+    }
+
+    public void getSize(String parentKey, final Api.OnValueChangeListener listener) {
+        api.database.getReference(path)
+                .orderByChild("parentKey")
+                .equalTo(parentKey)
+                .addChildEventListener(new ChildEventListener() {
+                    int count = 0;
+
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        count++;
+                        listener.onSizeChanged(count);
+                    }
+
+
+
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+                        count--;
+                        listener.onSizeChanged(count);
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
                 });
     }
 }

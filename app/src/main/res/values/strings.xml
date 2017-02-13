@@ -24,4 +24,7 @@
     <string name="done">Done</string>
     <string name="comment">Comment</string>
     <string name="commentaddhint">Write a comment..</string>
+    <string name="like">Like</string>
+    <string name="comments">comments</string>
+    <string name="likes">likes</string>
 </resources>

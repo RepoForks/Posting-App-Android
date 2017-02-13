@@ -115,5 +115,7 @@ public class PostFragment extends Fragment {
         void onListFragmentInteraction(Post item);
 
         void onCommentClickIteration(View view, Post item);
+
+        void onReactClickIteration(View view, Post mItem, int type);
     }
 }

@@ -278,4 +278,10 @@ public class MainActivity extends BaseActivity
                 CommentBottomSheetFragment.TAG
         );
     }
+
+    @Override
+    public void onReactClickIteration(View view, Post item, int type) {
+        Api.getInstance().react()
+                .toggle(item.key, auth.getCurrentUser().getUid(), type);
+    }
 }

@@ -10,12 +10,14 @@ public class Api {
     protected final FirebaseDatabase database;
     private final PostApi post;
     private final UserApi user;
+    private final ReactApi react;
 
-    public Api(FirebaseDatabase database) {
+    private Api(FirebaseDatabase database) {
         this.database = database;
 
         post  = new PostApi(this);
         user = new UserApi(this);
+        react = new ReactApi(this);
     }
 
     public static void init(FirebaseDatabase database){
@@ -31,5 +33,14 @@ public class Api {
 
     public UserApi user() {
         return user;
+    }
+
+    public ReactApi react() {
+        return react;
+    }
+
+    public interface OnValueChangeListener {
+
+        public void onSizeChanged(int size);
     }
 }
