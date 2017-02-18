@@ -31,10 +31,6 @@ public class Common {
     public static String getUserFriendlyDurationString(Context context, Calendar calendar) {
 
         Calendar currentCalendar = Calendar.getInstance();
-//        currentCalendar.set(Calendar.MILLISECOND, 0);
-//        currentCalendar.set(Calendar.SECOND, 0);
-//        currentCalendar.set(Calendar.MINUTE, 0);
-//        currentCalendar.set(Calendar.HOUR_OF_DAY, 0);
 
         String displayTime;
         long diff = currentCalendar.getTimeInMillis() - calendar.getTimeInMillis();

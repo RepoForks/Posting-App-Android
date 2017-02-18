@@ -18,6 +18,7 @@ import com.app.infideap.postingapp.resource.Api;
 import com.app.infideap.postingapp.util.Common;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -29,6 +30,7 @@ import java.util.Locale;
  */
 public class PostRecyclerViewAdapter extends RecyclerView.Adapter<PostRecyclerViewAdapter.ViewHolder> {
 
+    private static final String TAG = PostRecyclerViewAdapter.class.getSimpleName();
     private final List<Post> mValues;
     private final OnListFragmentInteractionListener mListener;
 
@@ -73,8 +75,6 @@ public class PostRecyclerViewAdapter extends RecyclerView.Adapter<PostRecyclerVi
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
                     mListener.onCommentClickIteration(v, holder.mItem);
                 }
             }
@@ -86,6 +86,19 @@ public class PostRecyclerViewAdapter extends RecyclerView.Adapter<PostRecyclerVi
             public void onClick(View view) {
                 mListener.onReactClickIteration(view, holder.mItem, 0);
             }
+        });
+
+        final int[] point = new int[2];
+
+        holder.reactLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                mListener.onReactLongClickIteration(point[0], v, holder);
+
+                holder.toggleAction();
+                return true;
+            }
+
         });
 
         holder.commentLayout.setOnClickListener(new View.OnClickListener() {
@@ -100,9 +113,9 @@ public class PostRecyclerViewAdapter extends RecyclerView.Adapter<PostRecyclerVi
         holder.reactOverviewLayout.setVisibility(View.GONE);
 
 
-
         holder.commentView.getCompoundDrawables()[0]
                 .setColorFilter(holder.commentView.getCurrentTextColor(), PorterDuff.Mode.SRC_ATOP);
+
 
         initWatcher(holder);
     }
@@ -179,7 +192,7 @@ public class PostRecyclerViewAdapter extends RecyclerView.Adapter<PostRecyclerVi
         return mValues.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements Serializable {
         public final View mView;
         public final TextView usernameView;
         public final TextView durationView;
@@ -192,6 +205,8 @@ public class PostRecyclerViewAdapter extends RecyclerView.Adapter<PostRecyclerVi
         public final TextView reactOverviewView;
         public final View postInfoLayout;
         public final View reactOverviewLayout;
+        public final View bottomActionEnableLayout;
+        public final View bottomActionDisableLayout;
         public Post mItem;
         public ImageView reactImageView;
 
@@ -211,11 +226,30 @@ public class PostRecyclerViewAdapter extends RecyclerView.Adapter<PostRecyclerVi
             commentLayout = view.findViewById(R.id.layout_comment);
             reactLayout = view.findViewById(R.id.layout_react);
             reactOverviewLayout = view.findViewById(R.id.layout_react_overview);
+
+            bottomActionEnableLayout = view.findViewById(R.id.layout_bottom_action_enable);
+            bottomActionDisableLayout = view.findViewById(R.id.layout_bottom_action_disable);
+
+            bottomActionDisableLayout.setVisibility(View.GONE);
         }
 
         @Override
         public String toString() {
             return super.toString() + " '" + durationView.getText() + "'";
+        }
+
+        public void toggleAction() {
+            bottomActionEnableLayout.setVisibility(
+                    bottomActionEnableLayout.getVisibility() == View.GONE ?
+                            View.VISIBLE : View.GONE);
+            bottomActionDisableLayout.setVisibility(
+                    bottomActionDisableLayout.getVisibility() == View.GONE ?
+                            View.VISIBLE : View.GONE);
+        }
+
+        public void enableAction() {
+            bottomActionEnableLayout.setVisibility(View.VISIBLE);
+            bottomActionDisableLayout.setVisibility(View.GONE);
         }
     }
 }

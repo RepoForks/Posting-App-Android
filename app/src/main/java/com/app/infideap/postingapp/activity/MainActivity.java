@@ -1,5 +1,6 @@
 package com.app.infideap.postingapp.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,21 +9,25 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
 import com.app.infideap.notificationapp.NotificationDao;
 import com.app.infideap.notificationapp.R;
 import com.app.infideap.postingapp.BaseApplication;
-import com.app.infideap.postingapp.fragment.CommentFragment;
-import com.app.infideap.postingapp.fragment.PostFragment;
+import com.app.infideap.postingapp.ReactPopupDialogFragment;
+import com.app.infideap.postingapp.adapter.PostRecyclerViewAdapter;
 import com.app.infideap.postingapp.entity.Notification;
 import com.app.infideap.postingapp.entity.Post;
 import com.app.infideap.postingapp.entity.User;
-import com.app.infideap.postingapp.fragment.NotificationFragment;
 import com.app.infideap.postingapp.fragment.CommentBottomSheetFragment;
+import com.app.infideap.postingapp.fragment.CommentFragment;
+import com.app.infideap.postingapp.fragment.NotificationFragment;
+import com.app.infideap.postingapp.fragment.PostFragment;
 import com.app.infideap.postingapp.resource.Api;
 import com.app.infideap.postingapp.util.IconTextDrawable;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,14 +44,16 @@ public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         NotificationFragment.OnListFragmentInteractionListener,
         CommentFragment.OnListFragmentInteractionListener,
-        PostFragment.OnListFragmentInteractionListener{
+        PostFragment.OnListFragmentInteractionListener {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     private Toolbar toolbar;
     private DrawerLayout drawer;
     private Menu menu;
     private EditText usernameEditText;
     private View siginRequiredContent;
     private View loadingOverlayContent;
+    private int[] point = new int[2];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +76,7 @@ public class MainActivity extends BaseActivity
     private void init() {
         siginRequiredContent = findViewById(R.id.content_signin_required);
         loadingOverlayContent = findViewById(R.id.content_loading_overlay);
-        usernameEditText = (EditText)findViewById(R.id.editText_username);
+        usernameEditText = (EditText) findViewById(R.id.editText_username);
         if (auth.getCurrentUser() == null) {
             siginRequiredContent.setVisibility(View.VISIBLE);
             siginRequiredContent.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +105,25 @@ public class MainActivity extends BaseActivity
         });
 
         displayFragment(R.id.container_list, PostFragment.newInstance(1));
+
+        findViewById(R.id.layout_touch).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                    case MotionEvent.ACTION_BUTTON_PRESS:
+                    case MotionEvent.ACTION_HOVER_ENTER:
+                    case MotionEvent.ACTION_POINTER_DOWN:
+                        point[0] = (int) event.getX();
+                        point[1] = (int) event.getY();
+                        Log.e(TAG, point[0] + ", " + point[1]);
+                        return false;
+
+                }
+                return false;
+            }
+        });
     }
 
     private void initDrawer() {
@@ -243,7 +269,7 @@ public class MainActivity extends BaseActivity
                 user.username = usernameEditText.getText().toString();
                 user.loginMethod = "anonymously";
                 user.uid = authResult.getUser().getUid();
-                user.createdDate= System.currentTimeMillis();
+                user.createdDate = System.currentTimeMillis();
                 Api.getInstance()
                         .user()
                         .add(
@@ -252,9 +278,9 @@ public class MainActivity extends BaseActivity
                                 new DatabaseReference.CompletionListener() {
                                     @Override
                                     public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                                        if (databaseError!=null){
+                                        if (databaseError != null) {
                                             auth.signOut();
-                                        }else{
+                                        } else {
                                             siginRequiredContent.setVisibility(View.GONE);
                                         }
 
@@ -283,5 +309,29 @@ public class MainActivity extends BaseActivity
     public void onReactClickIteration(View view, Post item, int type) {
         Api.getInstance().react()
                 .toggle(item.key, auth.getCurrentUser().getUid(), type);
+
+
+    }
+
+    @Override
+    public void onReactLongClickIteration(int x, View view, final PostRecyclerViewAdapter.ViewHolder holder) {
+
+
+        int []location = new int[2];
+        view.getLocationOnScreen(location);
+        Log.d(TAG, x + ", " + view.getY() + ", " + location[1] + ", "
+                + point[1]);
+        ReactPopupDialogFragment fragment= ReactPopupDialogFragment
+                .newInstance(point[0], location[1],
+                        view.getWidth(), view.getHeight(), holder.mItem);
+        fragment.show(getSupportFragmentManager(), ReactPopupDialogFragment.TAG);
+        getSupportFragmentManager().executePendingTransactions();
+        fragment.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                holder.enableAction();
+            }
+        });
+
     }
 }
